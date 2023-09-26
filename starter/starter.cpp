@@ -7,7 +7,7 @@ string W = "Hello World!";
 
 int main() {
 	cout << "Hello World!";
-	cout << endl; 
+	cout << endl;
 	cout << W;
 	cout << endl;
 }
