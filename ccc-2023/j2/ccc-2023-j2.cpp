@@ -35,5 +35,5 @@ int main() {
         }
     }
     cout << out;
-    return 1;
+    return 0;
 }

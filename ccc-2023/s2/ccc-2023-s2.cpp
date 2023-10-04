@@ -65,5 +65,5 @@ int main() {
         // output smallest
         cout << smallest << " ";
     }
-    return 1;
+    return 0;
 }

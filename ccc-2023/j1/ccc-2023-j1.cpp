@@ -13,5 +13,5 @@ int main() {
         out += 500;
     }
     cout << out;
-    return 1;
+    return 0;
 }

@@ -85,5 +85,5 @@ int main() {
 
     cout << tapeNeeded;
 
-    return 1;
+    return 0;
 }
