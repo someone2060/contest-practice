@@ -31,11 +31,15 @@ int main() {
         }
     }
 
-    bool isUp, isLeft;
+    bool isUp;
+    bool isLeft;
     int tapeNeeded = 0;
+    int arrayLen;
 
     // Loop through top row
-    for (int i=0; i<rowTop.size(); i++) {
+    arrayLen = rowTop.size();
+    for (int i=0; i<arrayLen; i++) {
+        isLeft = false;
         if (i != 0) {
             isLeft = rowTop[i-1];
         }
@@ -56,7 +60,9 @@ int main() {
     }
     
     // Loop through bottom row
-    for (int i=0; i<rowBottom.size(); i++) {
+    arrayLen = rowBottom.size();
+    for (int i=0; i<arrayLen; i++) {
+        isLeft = false;
         if (i != 0) {
             isLeft = rowBottom[i-1];
         }
