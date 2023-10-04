@@ -5,21 +5,13 @@
 using namespace std;
 
 int asymmetricValue(vector<int> heights) {
-    if (heights.size() <= 1) {
+    if (int(heights.size()) <= 1) {
         return 0;
     }
 
-    int out = 0;
-    for (int i=0; i<(heights.size()/2); i++) {
-        out += abs(heights[i] - heights[heights.size()-1-i]);
-    }
-    return out;
-}
-
-vector<int> slice(vector<int> v, int start, int end) {
-    vector<int> out (end-start);
-    for (int i=start; i<end; i++) {
-        out[i-start] = v[i];
+    long int out = 0;
+    for (int i=0; i<(int(heights.size())/2); i++) {
+        out += abs(heights[i] - heights[int(heights.size())-1-i]);
     }
     return out;
 }
@@ -37,33 +29,35 @@ int main() {
         heights[i] = input;
     }
 
-    /*/debug
-    vector<int> debug = slice(heights, 2, 5);
-    for (int i : debug) {
-        cout << i << " ";
-    }
-    cout << endl;
-    //*/
-
-    // calc
-    // if length of 1, will always return false
-    cout << "0 ";
-
     int smallest, testValue;
-    for (int i=1; i<heights.size(); i++) {
-        smallest = asymmetricValue(slice(heights, 0, i+1));
+    int heightsSize;
+    vector<int> firstCrop (1, heights[0]);
+    vector<int> crop;
+
+    heightsSize = heights.size();
+    // Loop for every mountain size
+    for (int i=0; i<heightsSize; i++) {
+        crop = firstCrop;
+        smallest = asymmetricValue(crop);
+
         // Loop through every possibilty
-        for (int j=1; j<(heights.size()-i); j++) {
+        for (int j=1; j<(heightsSize-i); j++) {
             if (smallest == 0) {
                 break;
             }
-            testValue = asymmetricValue(slice(heights, j, j+i+1));
+            crop.push_back(heights[i+j]);
+            crop.erase(crop.begin());
+
+            testValue = asymmetricValue(crop);
+
             if (testValue < smallest) {
                 smallest = testValue;
             }
         }
         // output smallest
         cout << smallest << " ";
+        // incr firstCrop
+        firstCrop.push_back(heights[i+1]);
     }
     return 0;
 }
