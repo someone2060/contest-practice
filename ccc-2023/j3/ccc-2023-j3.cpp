@@ -18,9 +18,9 @@ int main() {
         }
     }
 
-    int max = days[0];
-    vector<int> bestDays (1, max);
-    for (int i=1; i<5; i++) {
+    int max = 0;
+    vector<int> bestDays;
+    for (int i=0; i<5; i++) {
         if (days[i] < max) {
             continue;
         }
@@ -31,6 +31,14 @@ int main() {
         }
         bestDays.push_back(i);
     }
+
+    /*/debug
+    cout << "days: ";
+    for (int i : days) {
+        cout << i << ' ';
+    }
+    cout << endl;
+    //*/
 
     cout << (bestDays[0]+1);
     for (int i=1; i<int(bestDays.size()); i++) {
