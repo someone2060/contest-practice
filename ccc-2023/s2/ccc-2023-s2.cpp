@@ -1,63 +1,71 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <climits>
 
 using namespace std;
 
-int asymmetricValue(vector<int> heights) {
-    if (int(heights.size()) <= 1) {
-        return 0;
-    }
-
-    long int out = 0;
-    for (int i=0; i<(int(heights.size())/2); i++) {
-        out += abs(heights[i] - heights[int(heights.size())-1-i]);
-    }
-    return out;
-}
-
 int main() {
-    // input
-    int input;
-
     int N;
     cin >> N;
 
     vector<int> heights (N);
     for (int i=0; i<N; i++) {
-        cin >> input;
-        heights[i] = input;
+        cin >> heights[i];
     }
 
-    int smallest, testValue;
-    int heightsSize;
-    vector<int> firstCrop (1, heights[0]);
-    vector<int> crop;
+    int smallest;
+    int testValue;
+    int len = 1;
+    bool isOdd = true;
+    int offset, centre;
 
-    heightsSize = heights.size();
-    // Loop for every mountain size
-    for (int i=0; i<heightsSize; i++) {
-        crop = firstCrop;
-        smallest = asymmetricValue(crop);
+    int heightsSize = heights.size();
+    cout << "0 "; //len 1
+    // Loop for every crop when len >= 2
+    for (int i=1; i<heightsSize; i++) {
+        len++;
+        isOdd = (isOdd) ? false : true;
+        smallest = INT_MAX;
+        centre = len/2 - 1;
 
         // Loop through every possibilty
-        for (int j=1; j<(heightsSize-i); j++) {
-            if (smallest == 0) {
-                break;
-            }
-            crop.push_back(heights[i+j]);
-            crop.erase(crop.begin());
+        for (int j=0; j<(heightsSize-i); j++) {
+            testValue = 0;
+            /*/debug
+            cout << "\nNEW len: " << len;
+            //*/
+            offset = 0;
+            centre++;
+            while (offset < len/2) {
+                /*/debug
+                cout << "\nindex 1: " << centre-offset-1 << " index 2: " << centre+offset+isOdd << endl;
+                //*/
+                testValue += abs(heights[centre-offset-1] - heights[centre+offset+isOdd]);
+                if (testValue > smallest) {
+                    break;
+                }
+                offset++;
+            }//end asym
+            /*/debug
+            cout << "testValue: " << testValue << endl;
+            cout << "smallest: " << smallest << endl;
+            cout << "offset: " << offset << endl;
+            //*/
 
-            testValue = asymmetricValue(crop);
-
-            if (testValue < smallest) {
+            if (offset == len/2) {
                 smallest = testValue;
-            }
-        }
+                if (smallest == 0) {
+                    break;
+                }
+            }//end if
+
+        }//end j
+        /*/debug
+        cout << "OUT: ";
+        //*/
         // output smallest
         cout << smallest << " ";
-        // incr firstCrop
-        firstCrop.push_back(heights[i+1]);
-    }
+    }//end i
     return 0;
 }
