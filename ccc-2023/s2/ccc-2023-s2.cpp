@@ -32,26 +32,15 @@ int main() {
         // Loop through every possibilty
         for (int j=0; j<(heightsSize-i); j++) {
             testValue = 0;
-            /*/debug
-            cout << "\nNEW len: " << len;
-            //*/
             offset = 0;
             centre++;
             while (offset < len/2) {
-                /*/debug
-                cout << "\nindex 1: " << centre-offset-1 << " index 2: " << centre+offset+isOdd << endl;
-                //*/
                 testValue += abs(heights[centre-offset-1] - heights[centre+offset+isOdd]);
                 if (testValue > smallest) {
                     break;
                 }
                 offset++;
             }//end asym
-            /*/debug
-            cout << "testValue: " << testValue << endl;
-            cout << "smallest: " << smallest << endl;
-            cout << "offset: " << offset << endl;
-            //*/
 
             if (offset == len/2) {
                 smallest = testValue;
@@ -61,9 +50,7 @@ int main() {
             }//end if
 
         }//end j
-        /*/debug
-        cout << "OUT: ";
-        //*/
+        
         // output smallest
         cout << smallest << " ";
     }//end i
